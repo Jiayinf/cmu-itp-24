@@ -6,12 +6,21 @@ It's best not to modify the original files.
 
 Be sure to open the root directory from VS Code.
 
-You can pull the latest version of the lectures and assignments with the command
+## Updating your local copy
+You can pull the latest version of the lectures and assignments
+by running the command
 ```
 git pull
 ```
-If the repository has been bumped to a newer version of Mathlib, run
+in the root directory.
+
+We recommend that you also run the command
 ```
 lake exe cache get
 ```
-from the root directory.
+every time you update your local copy.
+This command downloads a pre-checked version
+of the `mathlib` mathematical library
+from the cloud.
+This way, Lean will not have to re-check all of `mathlib`
+which would take a very long time.
