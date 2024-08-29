@@ -1,6 +1,7 @@
 # Course Repository of Interactive Theorem Proving (21-321)
 
 You should have installed this repository following the instructions on Piazza.
+(See `assignment1.pdf` under the "Resources" tab.)
 You can add your own files in the `CmuItp24` folder alongside the other ones.
 It's best not to modify the original files.
 
