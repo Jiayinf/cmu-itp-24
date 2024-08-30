@@ -71,5 +71,5 @@
    "inputRev": "master",
    "inherited": false,
    "configFile": "lakefile.lean"}],
- "name": "«cmu-itp-24»",
+ "name": "cmu_itp_24",
  "lakeDir": ".lake"}
