@@ -43,9 +43,8 @@ You can read a proof of it on Wikipedia: https://en.wikipedia.org/wiki/Parallelo
 Formalize it using only the four identities above as well as the `ring` tactic.
 -/
 
--- 8 points
-
-example : ‖x + y‖^2 + ‖x - y‖^2  = 2 * (‖x‖^2 + ‖y‖^2) := by
+-- Exercise 1a. [8pts]
+theorem paralellogram_law : ‖x + y‖^2 + ‖x - y‖^2  = 2 * (‖x‖^2 + ‖y‖^2) := by
   sorry
 
 /-
@@ -101,8 +100,7 @@ Prove the following theorem, following the calculation in Wikipedia:
 x + x = (x+x)^2 = x^2 + x^2 + x^2 + x^2 = (x + x) + (x + x).
 -/
 
--- 6 points
-
+-- Exercise 2a. [6pts]
 theorem add_self (x : R) : x + x = 0 := by
   have h1 : x + x = (x + x) + (x + x) := by
     calc
@@ -125,8 +123,7 @@ Prove `neg_eq_self` using the calculation `-x = 0 - x = x + x - x = x`. You can 
 `zero_sub` and `add_sub_cancel_right`, as well as `add_self idem`.
 -/
 
--- 7 points
-
+-- Exercise 2b. [7pts]
 theorem neg_eq_self (x : R) : -x = x := by
   sorry
 
@@ -141,8 +138,7 @@ theorem sub_eq_add (x y : R) : x - y = x + y := by
 Prove this, using the calculation `x = x + y - y = 0 - y = -y = y`.
 -/
 
--- 6 points
-
+-- Exercise 2c. [6pts]
 theorem eq_of_add_eq_zero {x y : R} (h : x + y = 0) : x = y := by
   sorry
 
@@ -156,8 +152,7 @@ You can use the `abel` tactic to rearrange sums.
 example (x y : R) : x + x * y + y * x + y = x * y + y * x + x + y := by
   abel
 
--- 7 points
-
+-- Exercise 2d. [7pts]
 theorem mul_comm (x y : R) : x * y = y * x := by
   have h1 : 0 + (x + y) = (x * y + y * x) + (x + y) := by
     calc
@@ -236,9 +231,8 @@ nonnegative, which is the theorem `abs_nonneg`. You can also use `norm_num` to s
 `(9 : ℝ) = 3 * 3`.
 -/
 
--- 6 points
-
-example
+-- Exercise 3a. [6pts]
+theorem sum_le_28
     (hx : abs x ≤ 10)
     (hy : abs y ≤ 5)
     (hz : abs z ≤ 4)
