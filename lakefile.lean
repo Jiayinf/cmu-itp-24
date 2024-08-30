@@ -1,15 +1,13 @@
 import Lake
 open Lake DSL
 
-package "cmu-itp-24" where
-  -- Settings applied to both builds and interactive editing
+package cmu_itp_24 where
   leanOptions := #[
-    ⟨`pp.unicode.fun, true⟩ -- pretty-prints `fun a ↦ b`
+    ⟨`pp.unicode.fun, true⟩, -- pretty-prints `fun a ↦ b`
+    ⟨`autoImplicit, false⟩
   ]
-  -- add any additional package configuration options here
 
 require "leanprover-community" / "mathlib"
 
 @[default_target]
-lean_lib «CmuItp24» where
-  -- add any library configuration options here
+lean_lib CmuItp24
