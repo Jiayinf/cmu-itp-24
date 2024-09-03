@@ -41,7 +41,7 @@ lengths of the diagonals.
 
 You can read a proof of it on Wikipedia: https://en.wikipedia.org/wiki/Parallelogram_law.
 
-Formalize it using only the four identities above as well as the `ring` tactic.
+Formalize it using only the five identities above as well as the `ring` tactic.
 -/
 
 @[exercise "1a" 8]
