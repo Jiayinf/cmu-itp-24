@@ -48,12 +48,13 @@ Formalize it using only the five identities above as well as the `ring` tactic.
 theorem paralellogram_law : ‖x + y‖^2 + ‖x - y‖^2  = 2 * (‖x‖^2 + ‖y‖^2) := by
   sorry
 
+#check InnerProductSpace
 /-
 In fact, the theorem holds for arbitrary inner product spaces, with exactly the same proof.
 You can check this by replacing the variable declaration above by the following:
 
-variables {E : Type*} [inner_product_space ℝ E]
-variables x y z : E
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+variable (x y z : E)
 -/
 
 end parallelogram_exercise
