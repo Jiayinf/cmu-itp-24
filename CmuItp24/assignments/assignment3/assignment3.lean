@@ -7,7 +7,7 @@ FIRST EXERCISE: Strict monotonicity
 
 Section 3.1 of MIL discusses the `monotone` predicate. There is also a strict
 version. Prove the theorems below, *and* come up with suitable names
-(in other words, replace `example` with `theorem foo`.)
+(in other words, replace `theorem ex1a/b/c` with `theorem foo`.)
 
 (Don't use any library theorems about `strict_mono` or `monotone`! You should
 only use basic properties of orderings.)
