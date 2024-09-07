@@ -7,7 +7,7 @@ FIRST EXERCISE: Strict monotonicity
 
 Section 3.1 of MIL discusses the `monotone` predicate. There is also a strict
 version. Prove the theorems below, *and* come up with suitable names
-(in other words, replace `theorem ex1a/b/c` with `theorem foo`.)
+(in other words, replace `example` with `theorem foo`.)
 
 (Don't use any library theorems about `strict_mono` or `monotone`! You should
 only use basic properties of orderings.)
@@ -21,19 +21,19 @@ namespace strictMono_exercise
 variable (f : ℝ → ℝ) (g : ℝ → ℝ)
 
 @[exercise "1a" 3]
-theorem ex1a (hf : StrictMono f) (hg : StrictMono g) : StrictMono (f + g) := by
+example (hf : StrictMono f) (hg : StrictMono g) : StrictMono (f + g) := by
   sorry
 
 -- You'll have to guess the name of a theorem to prove this one.
 @[exercise "1b" 3]
-theorem ex1b (c : ℝ) (hf : StrictMono f) (hc : 0 < c) :
+example (c : ℝ) (hf : StrictMono f) (hc : 0 < c) :
     StrictMono (fun x => c * f x) := by
   sorry
 
 -- This is trickier than you might think. Use `by_cases h : a = b` to split
 -- on cases whether `a = b`. You can also use `lt_of_le_of_ne`.
 @[exercise "1c" 3]
-theorem ex1c (hf : StrictMono f) : Monotone f := by
+example (hf : StrictMono f) : Monotone f := by
   sorry
 
 /-
@@ -69,7 +69,7 @@ Show that every strictly monotone function is injective.
 -/
 
 @[exercise "1d" 3]
-theorem ex1d (hf : StrictMono f) : Injective f := by
+theorem injective_of_strictMono (hf : StrictMono f) : Injective f := by
   sorry
 
 end strictMono_exercise
