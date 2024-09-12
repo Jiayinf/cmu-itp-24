@@ -46,7 +46,29 @@ Formalize it using only the five identities above as well as the `ring` tactic.
 
 @[exercise "1a" 8]
 theorem paralellogram_law : ‖x + y‖^2 + ‖x - y‖^2  = 2 * (‖x‖^2 + ‖y‖^2) := by
-  sorry
+  -- have h1 : ‖x + y‖^2 = ⟪x, x⟫ + ⟪x, y⟫ + ⟪y, x⟫ + ⟪y, y⟫ := by
+  --   rw [real_inner_self_eq_norm_sq, inner_add_left, inner_add_right]
+
+  have h1 : ‖x + y‖^2 = ⟪x + y, x + y⟫ := by
+    rw [real_inner_self_eq_norm_sq]
+
+
+  have h2 : ‖x - y‖^2 = ⟪x - y, x - y⟫ := by
+    rw [real_inner_self_eq_norm_sq]
+
+  rw [h1, h2]
+
+  have h3 : ⟪x + y, x + y⟫ = ⟪x, x⟫ + ⟪x, y⟫ + ⟪y, x⟫ + ⟪y, y⟫ := by
+    rw [inner_add_add_self]
+
+  have h4 : ⟪x - y, x - y⟫ = ⟪x, x⟫ - ⟪x, y⟫ - ⟪y, x⟫ + ⟪y, y⟫ := by
+    rw [inner_sub_sub_self]
+
+  rw [h3, h4]
+
+  ring
+
+  rw [real_inner_self_eq_norm_sq, real_inner_self_eq_norm_sq]
 
 /-
 In fact, the theorem holds for arbitrary inner product spaces, with exactly the same proof.
@@ -106,9 +128,14 @@ theorem add_self (x : R) : x + x = 0 := by
   have h1 : x + x = (x + x) + (x + x) := by
     calc
       x + x = (x + x)^2 := by
-        sorry
+        rw [pow_two]
+        rw [mul_idem idem]
+
       _ = x + x + (x + x) := by
-        sorry
+        rw [pow_two]
+        rw [mul_add, add_mul]
+        rw [mul_idem idem]
+
   have h2 : (x + x) + (x + x) - (x + x) = (x + x) - (x + x) := by
     rw [←h1]
   rw [add_sub_cancel_left, sub_self] at h2
@@ -126,7 +153,12 @@ Prove `neg_eq_self` using the calculation `-x = 0 - x = x + x - x = x`. You can 
 
 @[exercise "2b" 7]
 theorem neg_eq_self (x : R) : -x = x := by
-  sorry
+  have h1 : -x = 0 - x := by
+    rw [zero_sub]
+  have h2 : 0 - x = x + x - x := by
+    rw [add_self idem x]
+
+  rw [h1, h2, add_sub_cancel_right]
 
 /-
 This is a corollary.
@@ -141,7 +173,23 @@ Prove this, using the calculation `x = x + y - y = 0 - y = -y = y`.
 
 @[exercise "2c" 6]
 theorem eq_of_add_eq_zero {x y : R} (h : x + y = 0) : x = y := by
-  sorry
+
+  have h1 : x = x + y - y := by
+
+    have k : y - y = 0 := by
+      rw [sub_eq_add_neg]
+      rw [add_neg_eq_zero]
+
+    rw [add_sub_assoc, k, add_zero]
+
+  have h2 : x + y - y = 0 - y := by
+    rw [h]
+
+  have h3: 0 - y = -y := by
+    rw [zero_sub]
+
+  rw[h1, h2, h3, neg_eq_self idem]
+
 
 /- Finally, prove `mul_comm` using the following argument from Wikipedia:
 
@@ -158,9 +206,16 @@ theorem mul_comm (x y : R) : x * y = y * x := by
   have h1 : 0 + (x + y) = (x * y + y * x) + (x + y) := by
     calc
       0 + (x + y) = (x + y)^2 := by
-        sorry
+        rw [zero_add, pow_two]
+        rw [mul_idem idem]
+
       _ = x * y + y * x + (x + y) := by
-        sorry
+        rw [pow_two]
+        rw [mul_add, add_mul, add_mul, mul_idem idem, mul_idem idem]
+        abel
+
+
+
   have h2 : 0 = x * y + y * x := by
     exact add_right_cancel h1
   show x * y = y * x
@@ -231,6 +286,14 @@ Prove the following. You can also use the theorems `abs_sub`, `pow_two` to expan
 nonnegative, which is the theorem `abs_nonneg`. You can also use `norm_num` to show that
 `(9 : ℝ) = 3 * 3`.
 -/
+#check abs_pos
+
+example {a b : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) : a^2 ≤ b^2 :=
+  pow_le_pow_left ha hab 2
+
+example {a b : ℝ} (h : |a| ≤ b) : a^2 ≤ b^2 := by
+  rw [←sq_abs a]
+  exact pow_le_pow_left (abs_nonneg a) h 2
 
 @[exercise "3a" 6]
 theorem sum_le_28
@@ -239,6 +302,36 @@ theorem sum_le_28
     (hz : abs z ≤ 4)
     (hw : abs w ≤ 3) :
     abs (x - y + z) + w^2 ≤ 28 := by
-  sorry
+
+  have h1 : abs (x - y + z) ≤ abs (x - y) + abs z := by
+    apply abs_add
+
+  have h2 : abs (x - y) ≤ abs x + abs y := by
+    apply abs_sub
+
+  have h3 : abs (x - y + z) ≤ (abs x + abs y) + 4 := by
+    apply le_trans h1
+    exact add_le_add h2 hz
+
+  have h4 : w^2 ≤ 9 := by
+    trans 3^2
+    · rw [←sq_abs w]
+      exact pow_le_pow_left (abs_nonneg w) hw 2
+    norm_num
+
+  -- have h5 : abs x + abs y ≤ 15 := by
+  --   trans 10 + 5
+  --   · exact add_le_add hx hy
+  --   norm_num
+
+  apply le_trans
+  apply add_le_add
+  exact h3
+  exact h4
+
+  linarith
+
+
+
 
 end absolute_value_exercise
