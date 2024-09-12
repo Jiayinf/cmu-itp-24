@@ -13,20 +13,37 @@ syntax (name := exerciseAttrStx) "exercise" str ptVal : attr
 
 open Lean
 
+register_option autograde.stencil : Bool := {
+  descr := "(autograde) For internal use in the autograder. Turns errors into warnings."
+  defValue := false
+}
+
+def throwErrorUnlessStencil {m : Type → Type}
+    [Monad m] [MonadError m] [MonadOptions m] [MonadLog m] [AddMessageContext m]
+    (msg : MessageData) : m Unit := do
+  if autograde.stencil.get (← getOptions) then
+    Lean.logWarning msg
+  else
+    throwError msg
+
 /-- `@[exercise name pts]` marks the exercise named `name`,
 indicating that it is worth `pts` pts.
 For example, `@[exercise "1a" 8]`. -/
-initialize exerciseAttr : ParametricAttribute (String × Float) ←
+initialize exerciseAttr : ParametricAttribute (String × Float) ← do
   registerParametricAttribute {
     name := `exerciseAttrStx
     descr := ""
-    getParam := fun
-      | _, `(attr| exercise $name:str $pts:num) =>
+    getParam := fun n stx => do
+      if n matches .str _ "_example" then
+        throwErrorUnlessStencil "Exercise solutions cannot be `example`s.\n\
+          Please give the exercise a name with `theorem someName` or `def someName`."
+      match stx with
+      | `(attr| exercise $name:str $pts:num) =>
         return (name.getString, pts.getNat.toFloat)
-      | _, `(attr| exercise $name:str $pts:scientific) =>
+      | `(attr| exercise $name:str $pts:scientific) =>
         let (n, s, d) := pts.getScientific
         return (name.getString, Float.ofScientific n s d)
-      | _, _ => throwError "Invalid autograded exercise attribute."
+      | _ => throwError "Unexpected attribute syntax '{stx}'."
   }
 
 /-- Identify all constants marked as exercises in `env`.

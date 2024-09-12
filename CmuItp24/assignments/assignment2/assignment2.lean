@@ -70,12 +70,13 @@ theorem paralellogram_law : ‖x + y‖^2 + ‖x - y‖^2  = 2 * (‖x‖^2 + �
 
   rw [real_inner_self_eq_norm_sq, real_inner_self_eq_norm_sq]
 
+#check InnerProductSpace
 /-
 In fact, the theorem holds for arbitrary inner product spaces, with exactly the same proof.
 You can check this by replacing the variable declaration above by the following:
 
-variables {E : Type*} [inner_product_space ℝ E]
-variables x y z : E
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+variable (x y z : E)
 -/
 
 end parallelogram_exercise
