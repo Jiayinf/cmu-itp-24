@@ -96,12 +96,13 @@ Use that version to prove the more general one that comes after.
 -/
 
 -- We'll do this in class! You don't have to prove it.
-theorem ivt {f : ℝ → ℝ} {a b : ℝ} (aleb : a ≤ b)
-    (ctsf : Continuous f) (hfa : f a < 0) (hfb : 0 < f b) :
-  ∃ x, a ≤ x ∧ x ≤ b ∧ f x = 0 :=
-sorry
+variable
+  (ivt : {f : ℝ → ℝ} → {a b : ℝ} →
+    a ≤ b → Continuous f → f a < 0 → 0 < f b →
+    ∃ x, a ≤ x ∧ x ≤ b ∧ f x = 0)
 
 -- Use `ivt` to prove this.
+include ivt
 
 @[exercise "4" 8]
 theorem ivt' {f : ℝ → ℝ} {a b c : ℝ} (aleb : a ≤ b)
