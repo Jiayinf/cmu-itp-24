@@ -141,7 +141,7 @@ example (h : x ≤ y ∧ x ≠ y) : ¬ y ≤ x := by
   rcases h with ⟨h1, h2⟩
   contrapose! h2
   exact le_antisymm h1 h2
-  -- linarith
+  --linarith
 
 example (h : x ≤ y ∧ x ≠ y) : ¬ y ≤ x := by
   have h1 := h.left
