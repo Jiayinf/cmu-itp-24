@@ -163,13 +163,13 @@ instance : Quasigroup ℤ where
   ldiv := sorry
   rdiv := sorry
   mul_ldiv_cancel := by
-      sorry
+    sorry
   rdiv_mul_cancel := by
-      sorry
+    sorry
   ldiv_unique := by
-      sorry
+    sorry
   rdiv_unique := by
-      sorry
+    sorry
 
 /- Finally, prove that some identities hold in *any* quasigroup. -/
 
