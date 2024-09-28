@@ -122,12 +122,13 @@ class Quasigroup (α : Type*) extends Mul α where
   rdiv : α → α → α
   mul_ldiv_cancel : ∀ a b, a * ldiv a b = b
   rdiv_mul_cancel : ∀ a b, rdiv a b * b = a
-  ldiv_unique : sorry
-  rdiv_unique : sorry
+  ldiv_unique : sorryAx Prop
+  rdiv_unique : sorryAx Prop
 
 /-
-Declaring this as a `class` means that whenever you can use the constants
-and axioms in any instance.
+Declaring `Quasigroup` as a `class` means
+that you can use the constants and axioms
+without explicitly referring to a particular instance of `Quasigroup`.
 -/
 
 section
