@@ -185,7 +185,7 @@ def eval : PropForm → (ℕ → Bool) → Bool
   | fls,      _ => false
   | conj A B, v => A.eval v && B.eval v
   | disj A B, v => A.eval v || B.eval v
-  | impl A B, v => !! A.eval v || B.eval v
+  | impl A B, v => ! A.eval v || B.eval v
 
 /-
 This defines what it means to substitute a formula for a variable.
@@ -199,7 +199,7 @@ def subst : PropForm → ℕ → PropForm → PropForm
   | impl A B, m, C => impl (A.subst m C) (B.subst m C)
 
 /-
-The definition and theorem are examples. I will discuss them
+The next definition and theorem are examples. I will discuss them
 in class.
 
 Note that in the compound cases, we use the inductive hypotheses
