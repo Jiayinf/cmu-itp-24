@@ -1,0 +1,36 @@
+/-
+# Fermat Numbers and Coprimality
+
+The definition of Fermat numbers is:
+Fₙ = 2^(2^n) + 1
+
+We prove the theorem that for any two distinct Fermat numbers Fₙ and Fₘ
+with n ≠ m, their greatest common divisor is 1, meaning they are coprime.
+-/
+
+-- Define the n-th Fermat number: Fₙ = 2^(2^n) + 1
+def fermat (n : ℕ) : ℕ := 2 ^ (2 ^ n) + 1
+
+-- Helper lemma: 2^(2^n) ≡ -1 (mod Fₙ)
+lemma mod_fermat (n : ℕ) : 2 ^ (2 ^ n) ≡ -1 [MOD fermat n] := by
+  sorry
+
+/-
+Theorem: If n ≠ m, then Fermat numbers Fₙ and Fₘ are coprime.
+That is, gcd(Fₙ, Fₘ) = 1 for n ≠ m.
+-/
+theorem fermat_coprime (n m : ℕ) (h : n ≠ m) : Nat.coprime (fermat n) (fermat m) := by
+  sorry
+
+
+
+-- Prove that gcd(F(m), F(n)) = 1 for m ≠ n
+
+-- Assume without loss of generality that m < n.
+
+-- Decompose F(n) - 2 modulo F(m) based on your notes:
+-- F(m) divides F(n) - 2, which implies gcd(F(m), F(n)) must divide 2.
+
+-- Since both Fermat numbers are odd (F(n) = 2^(2^n) + 1),
+-- their gcd must divide an odd number (i.e., 1 or 3), but only 1 is possible.
+-- Now show that the only divisor of 2 common between odd Fermat numbers is 1.

@@ -164,6 +164,9 @@ theorem neg_eq_self (x : R) : -x = x := by
 /-
 This is a corollary.
 -/
+/-
+
+-/
 
 theorem sub_eq_add (x y : R) : x - y = x + y := by
   rw [sub_eq_add_neg, neg_eq_self idem]
