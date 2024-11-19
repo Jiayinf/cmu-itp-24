@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.Data.Real.Basic
+import Mathlib.Tactic
 import Mathlib.Algebra.Order.Ring.Basic
 import CmuItp24.Autograde
 
@@ -39,11 +40,18 @@ theorem power_divisibility (n m : ℕ) (h : n < m) : 2^(2^(n + 1)) - 1 ∣ 2^(2^
   -- 首先，我们把 2^(2^m) - 1 写成 2^(2^(n+1) * k) - 1 的形式
   let b := 2^(n + 1)
   let k := 2^(m - (n + 1))
+  have h1 : 2^(2^m) - 1 = (2^(2^(n + 1)))^(2^(m - (n + 1))) - 1 := by
+    rw [←Nat.pow_mul]
+    congr 1
+    rw [Nat.pow_add, Nat.pow_one]
+
+    linarith
 
   -- 我们可以重写 2^(2^m) - 1 = (a^b)^k - 1
   have h1 : 2^(2^m) - 1 = (a^b)^k - 1 := by
-    calc
-      a^(b * k) - 1 = 2^(b * k) - 1 : by rw [←Nat.pow_mul]
+    rw [←Nat.pow_mul]
+    congr 1
+
       _ = 2^(2^(n + 1) * 2^(m - (n + 1))) - 1 : rfl
       _ = 2^(2^m) - 1 : by
         rw [Nat.pow_add, Nat.mul_comm]

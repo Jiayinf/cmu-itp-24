@@ -35,6 +35,15 @@ variable {α : Type*}
 def A : Set ℕ := {1, 2}
 def S : Set (Set ℕ) := { t | A ⊆ t }
 
+
+-- lemma h6 (m n : ℕ) : (2 ^ 2 ^ m - 1 + 2) % ((2 ^ 2 ^ n + 1) * (2 ^ 2 ^ n - 1)) = 2 := by sorry
+
+-- lemma h7 (m n : ℕ)  : (2 ^ 2 ^ m - 1 + 2) % ((2 ^ 2 ^ n + 1) * (2 ^ 2 ^ n - 1)) % (2 ^ 2 ^ n + 1) = 2 := by sorry
+-- lemma h8 (m n : ℕ) : (2 ^ 2 ^ m - 1 + 2) % ((2 ^ 2 ^ n + 1) * (2 ^ 2 ^ n - 1)) = (2 ^ 2 ^ m - 1 + 2) % ((2 ^ 2 ^ n + 1) * (2 ^ 2 ^ n - 1)) % (2 ^ 2 ^ n + 1) := by
+--   rw[h7, h6]
+
+
+
 example : ⋂₀ S ⊆ A :=
   λ x hx => hx A (λ a ha => ha)
 
