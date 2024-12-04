@@ -3,7 +3,6 @@ import Mathlib.Data.Matrix.Basic
 import Mathlib.Tactic
 import CmuItp24.Autograde
 
-
 /-
 Once we open the `Finset` namespace, we can use `range` instead of
 `Finset.range`, and `sum_range_succ` instead of `Finset.sum_range_succ`,
@@ -50,7 +49,6 @@ and inequalities involving the integers. Here is an example:
 example (n : ℕ) : fac n - 1 + 1 = fac n := by
   have := fac_pos n
   omega
-
 
 /-
 Prove the following identities.
